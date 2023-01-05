@@ -9,22 +9,24 @@ import ru.graphorismo.data.products.ProductRepository
 fun Routing.getTitles(){
     var productsRepository = ProductRepository.getInstance()
 
-    get("/titles") {
-        call.respond(productsRepository.getProductsTitles())
+    get("/ids") {
+        call.respond(productsRepository.getProductsIds())
     }
 }
 
-fun Routing.getProductsUnderTitle(){
+fun Routing.getProductUnderId(){
     var productsRepository = ProductRepository.getInstance()
 
-    get("/products") {
-        var products = listOf<Product>()
-        if(call.request.queryParameters["title"] != null)
+    get("/product") {
+        var products : List<Product> = listOf()
+        if(call.request.queryParameters["id"] != null)
         {
-            var title = call.request.queryParameters["title"]
-            products = productsRepository.getProductsUnderTitle(title!!)
+            var id = call.request.queryParameters["id"]
+            products = productsRepository.getProductUnderId(id!!.toInt())
+
         }
         call.respond(products)
+
     }
 
 }

@@ -13,17 +13,18 @@ class ProductDatabase(name: String) {
         }
     }
 
-    fun getTitles(): List<String> {
+    fun getIds(): List<Int> {
         var products = transaction(dataBase) {
-            var query = ProductData.selectAll().groupBy(ProductData.title)
-            query.map { it[ProductData.title] }
+            var query = ProductData.selectAll()
+            query.map { it[ProductData.id] }
         }
         return products
     }
 
-    fun getProductsUnderTitle(title: String) : List<Product>{
+    fun getProductUnderId(id: Int) : List<Product> {
         var products = transaction(dataBase) {
-            var query = ProductData.select {ProductData.title eq title}
+            var query = ProductData.select {ProductData.id eq id}
+            query.limit(1)
             query.map { ProductData.toProduct(it) }
         }
         return products

@@ -17,12 +17,12 @@ class ProductRepository(private val database: ProductDatabase) {
         }
     }
 
-    fun getProductsTitles(): List<String> {
-        return database.getTitles()
+    fun getProductsIds(): List<Int> {
+        return database.getIds()
     }
 
-    fun getProductsUnderTitle(title: String) : List<Product>{
-        return database.getProductsUnderTitle(title)
+    fun getProductUnderId(id: Int) : List<Product> {
+        return database.getProductUnderId(id)
     }
 
     fun getAllProducts() : List<Product>{
